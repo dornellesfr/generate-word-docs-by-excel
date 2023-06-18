@@ -1,10 +1,9 @@
 import pandas as pd
 import json
 
-def create_json():  
-  data_df = pd.read_excel('dado.xlsx')
+def create_json(path_file):  
+  data_df = pd.read_excel(path_file)
   data_df.to_json('data.json', force_ascii=False, indent=2)
-
 
 def read_json():
   with open('data.json', 'r') as file:
@@ -55,4 +54,21 @@ def replace_vars(empreendimento: str, endereco: str, area_construida: str, multa
     file.write(content)
     file.close()
 
-read_json()
+
+while True:
+  print(20*'-')
+  print('[1] - Atualizar a planilha (base de dados)')
+  print('[2] - Gerar os arquivos .rtf')
+  print('[3] - Fechar o programa')
+  input_data = int(input('Digite o que deseja fazer: '))
+  print(20*'-')
+
+  if input_data == 3:
+    break
+  
+  if input_data == 1:
+    path = input('Adicione o caminho do arquivo xlsx: ')
+    create_json(path)
+  
+  if input_data == 2:
+    read_json()
